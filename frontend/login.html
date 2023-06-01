@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Login</h1>
+    <form id="loginForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <input type="submit" value="Login">
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').submit(function(event) {
+                event.preventDefault(); 
+                
+               
+                var email = $('#email').val();
+                var password = $('#password').val();
+
+               
+                var loginData = {
+                    "email": email,
+                    "password": password
+                };
+
+
+                $.ajax({
+                    url: "http://localhost/php project/api_jwt/v1/login.php",
+                    type: "POST",
+                    data: JSON.stringify(loginData),
+                    contentType: "application/json; charset=UTF-8",
+                    success: function(response) {
+
+                        console.log(response);
+                        if (response.status === 1) {
+                            var jwt = response.jwt;
+
+                            alert("User logged in successfully!");
+                        } else {
+                            alert("Invalid credentials: " + response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText);
+                        alert("An error occurred while processing your request.");
+                    }
+                });
+            });
+        }); 
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create User</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Create User</h1>
+    <form id="createUserForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $('#createUserForm').submit(function(event) {
+                event.preventDefault(); 
+                
+               
+                var name = $('#name').val();
+                var email = $('#email').val();
+                var password = $('#password').val();
+
+               
+                var userData = {
+                    "name": name,
+                    "email": email,
+                    "password": password
+                };
+
+               
+                $.ajax({
+                    url: "http://localhost/php project/api_jwt/v1/create-user.php",
+                    type: "POST",
+                    data: JSON.stringify(userData),
+                    contentType: "application/json; charset=UTF-8",
+                    success: function(response) {
+                       
+                        console.log(response);
+                        if (response.status === 1) {
+                            alert("User data inserted successfully!");
+                        } else {
+                            alert("Failed to insert data: " + response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText);
+                        alert("An error occurred while processing your request.");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
