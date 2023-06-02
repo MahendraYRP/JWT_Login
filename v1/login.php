@@ -36,14 +36,14 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
             $name = $user_data['name'];
             $email = $user_data['email'];
             $password = $user_data['password'];
-            
+
             // normal password, hashed password
             if(password_verify($data->password, $password)){ 
 
               $iss = "localhost";
               $iat = time();
               $nbf = $iat + 10;
-              $exp = $iat + 180;
+              $exp = $iat + 1800;
               $aud = "myusers";
               $user_arr_data = array(
                 "id" => $user_data['id'],

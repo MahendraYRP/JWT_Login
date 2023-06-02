@@ -13,7 +13,9 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
         
-        <input type="submit" value="Login">
+       <input type="submit" value="Login">
+       <!-- <a href="http://localhost/php%20project/api_jwt/frontend/addProject.html"></a>
+     -->
     </form>
 
     <script>
@@ -42,8 +44,11 @@
                         console.log(response);
                         if (response.status === 1) {
                             var jwt = response.jwt;
-
+                              console.log(jwt);
                             alert("User logged in successfully!");
+
+
+
                         } else {
                             alert("Invalid credentials: " + response.message);
                         }

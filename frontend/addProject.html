@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Project</title>
+</head>
+<body>
+    <h1>Create Project</h1>
+
+    <form id="createProjectForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea><br><br>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="pending">Pending</option>
+            <option value="in_progress">In Progress</option>
+            <option value="completed">Completed</option>
+        </select><br><br>
+
+        <input type="submit" value="Create">
+    </form>
+
+    <div id="response"></div>
+
+    <script>
+        document.getElementById("createProjectForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var name = document.getElementById("name").value;
+            var description = document.getElementById("description").value;
+            var status = document.getElementById("status").value;
+
+            var data = {
+                "name": name,
+                "description": description,
+                "status": status
+            };
+
+            fetch("http://localhost/php%20project/api_jwt/v1/create-project-api.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsb2NhbGhvc3QiLCJpYXQiOjE2ODU2OTA2MDUsIm5iZiI6MTY4NTY5MDYxNSwiZXhwIjoxNjg1NjkyNDA1LCJhdWQiOiJteXVzZXJzIiwiZGF0YSI6eyJpZCI6NSwibmFtZSI6Im1haGVuZHJhIiwiZW1haWwiOiJtYWhlQGdtYWlsLmNvbSJ9fQ.x0i40TeY63YXnT3ntlOQG40firnfNds5nG7EYWRiW2LtE9T2tRR8yzpxWSvN9uMTvD3xtd0Xx2wahX2ap8Utng"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 1) {
+                    document.getElementById("response").innerHTML = "Project has been created";
+                } else {
+                    document.getElementById("response").innerHTML = "Failed to create project";
+                }
+            })
+            .catch(error => {
+                document.getElementById("response").innerHTML = "Error: " + error.message;
+            });
+        });
+    </script>
+</body>
+</html>

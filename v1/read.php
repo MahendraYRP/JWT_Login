@@ -22,9 +22,9 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 
    $data = json_decode(file_get_contents("php://input"));
 
-//    $all_headers = getallheaders();
+   $all_headers = getallheaders();
 
-//    $data->jwt = $all_headers['Authorization'];
+   $data->jwt = $all_headers['Authorization'];
 
    if(!empty($data->jwt)){
 
