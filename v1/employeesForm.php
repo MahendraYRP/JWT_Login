@@ -7,6 +7,9 @@ use \Firebase\JWT\JWT;
 
 //include headers
 header("Access-Control-Allow-Origin: *");
+
+header("Access-Control-Allow-Headers: *");
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Content-type: application/json; charset=utf-8");
 
@@ -28,7 +31,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 
    $headers = getallheaders();
 
-   if (!empty($data->name) && !empty($data->email) && !empty($data->phone_number)&& !empty($data->salary) && !empty($data->gender) && 
+   if (!empty($data->name) && !empty($data->email) && !empty($data->phone_number) && !empty($data->gender) && 
    !empty($data->address) && !empty($data->city) && !empty($data->state) && !empty($data->pin_code)) {
 
      try{
@@ -43,7 +46,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
        $emp_obj->name = $data->name;
        $emp_obj->email = $data->email;
        $emp_obj->phone_number = $data->phone_number;   
-       $emp_obj->salary = $data->salary;   
+      //  $emp_obj->salary = $data->salary;   
        $emp_obj->gender = $data->gender;
        $emp_obj->address = $data->address;
        $emp_obj->city = $data->city;
@@ -71,7 +74,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
        http_response_code(500); //server error
        echo json_encode(array(
          "status" => 0,
-         "message" => $ex->getMessage()
+         "message" => $ex->getMessage(),
+        
        ));
      }
      

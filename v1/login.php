@@ -6,6 +6,7 @@ use \Firebase\JWT\JWT;
 
 //include headers
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Methods: POST");
 header("Content-type: application/json; charset=utf-8");
 

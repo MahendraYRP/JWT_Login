@@ -7,6 +7,9 @@ use \Firebase\JWT\JWT;
 
 //include headers
 header("Access-Control-Allow-Origin: *");
+
+header("Access-Control-Allow-Headers: *");
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Content-type: application/json; charset=utf-8");
 
@@ -19,7 +22,7 @@ $db = new Database();
 
 $connection = $db->connect();
 
-$user_obj = new User($connection);
+$salary_obj = new User($connection);
 
 if($_SERVER['REQUEST_METHOD'] === "POST"){
 
@@ -28,7 +31,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 
    $headers = getallheaders();
 
-   if(!empty($data->name) && !empty($data->description) && !empty($data->status)){
+   if (!empty($data->salary) && !empty($data->year)) {
 
      try{
 
@@ -37,13 +40,14 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
        $secret_key = "owt125";
 
        $decoded_data = JWT::decode($jwt, $secret_key, array('HS512'));
+       
+       $salary_obj->user_id = $decoded_data->data->id;
+       $salary_obj->salary = $data->salary;
+       $salary_obj->year = $data->year;
 
-       $user_obj->user_id = $decoded_data->data->id;
-       $user_obj->project_name = $data->name;
-       $user_obj->description = $data->description;
-       $user_obj->status = $data->status;
 
-       if($user_obj->create_project()){
+
+       if($salary_obj->empSalary()){
 
          http_response_code(200); // ok
          echo json_encode(array(
@@ -64,7 +68,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
        http_response_code(500); //server error
        echo json_encode(array(
          "status" => 0,
-         "message" => $ex->getMessage()
+         "message" => $ex->getMessage(),
+         "message2" => "test 2"
        ));
      }
      

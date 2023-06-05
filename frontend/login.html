@@ -33,9 +33,9 @@
                     "password": password
                 };
 
-
+                console.log(loginData);
                 $.ajax({
-                    url: "http://localhost/php project/api_jwt/v1/login.php",
+                    url: "http://localhost/php%20project/api_jwt/v1/login.php",
                     type: "POST",
                     data: JSON.stringify(loginData),
                     contentType: "application/json; charset=UTF-8",
@@ -45,6 +45,7 @@
                         if (response.status === 1) {
                             var jwt = response.jwt;
                               console.log(jwt);
+                               localStorage.setItem("token",jwt)
                             alert("User logged in successfully!");
 
 
@@ -55,6 +56,7 @@
                     },
                     error: function(xhr, status, error) {
                         console.log(xhr.responseText);
+                        console.log(error);
                         alert("An error occurred while processing your request.");
                     }
                 }); 
