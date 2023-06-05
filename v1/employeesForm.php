@@ -19,7 +19,7 @@ $db = new Database();
 
 $connection = $db->connect();
 
-$user_obj = new User($connection);
+$emp_obj = new User($connection);
 
 if($_SERVER['REQUEST_METHOD'] === "POST"){
 
@@ -28,7 +28,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 
    $headers = getallheaders();
 
-   if(!empty($data->name) && !empty($data->description) && !empty($data->status)){
+   if (!empty($data->name) && !empty($data->email) && !empty($data->phone_number)&& !empty($data->salary) && !empty($data->gender) && 
+   !empty($data->address) && !empty($data->city) && !empty($data->state) && !empty($data->pin_code)) {
 
      try{
 
@@ -37,13 +38,19 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
        $secret_key = "owt125";
 
        $decoded_data = JWT::decode($jwt, $secret_key, array('HS512'));
+       
+       $emp_obj->user_id = $decoded_data->data->id;
+       $emp_obj->name = $data->name;
+       $emp_obj->email = $data->email;
+       $emp_obj->phone_number = $data->phone_number;   
+       $emp_obj->salary = $data->salary;   
+       $emp_obj->gender = $data->gender;
+       $emp_obj->address = $data->address;
+       $emp_obj->city = $data->city;
+       $emp_obj->state = $data->state;
+       $emp_obj->pin_code = $data->pin_code;
 
-       $user_obj->user_id = $decoded_data->data->id;
-       $user_obj->project_name = $data->name;
-       $user_obj->description = $data->description;
-       $user_obj->status = $data->status;
-
-       if($user_obj->create_project()){
+       if($emp_obj->create_Employees()){
 
          http_response_code(200); // ok
          echo json_encode(array(

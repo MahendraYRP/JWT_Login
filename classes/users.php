@@ -3,6 +3,15 @@
 class User
 {
 
+    public $phone_number;
+    public $salary;
+    public $gender;
+    public $address;
+    public $city;
+    public $state;
+    public $pin_code;
+    
+
     // define properties
     public $name;
     public $email;
@@ -15,12 +24,14 @@ class User
     private $conn;
     private $users_tbl;
     private $projects_tbl;
+    private $employees_tbl;
 
     public function __construct($db)
     {
         $this->conn = $db;
         $this->users_tbl = "user_table";
         $this->projects_tbl = "project_table";
+        $this->employees_tbl = "Employees";
     }
 
     public function create_user()
@@ -120,4 +131,50 @@ class User
         return false;
   
     }
-}
+
+
+    public function create_Employees(){
+
+        $Employees_query = "INSERT INTO ".$this->employees_tbl." SET user_id = ?, name = ?, email = ?, phone_number = ?, salary = ?, gender = ?, address = ?, city = ?, state = ?, pin_code = ?";
+
+        
+        $Employees_list = $this->conn->prepare($Employees_query);
+    
+        $name = htmlspecialchars(strip_tags($this->name));
+        $email = htmlspecialchars(strip_tags($this->email));
+        $phone_number = htmlspecialchars(strip_tags($this->phone_number));
+        $salary = htmlspecialchars(strip_tags($this->salary));
+        $gender = htmlspecialchars(strip_tags($this->gender));
+        $address = htmlspecialchars(strip_tags($this->address));
+        $city = htmlspecialchars(strip_tags($this->city));
+        $state = htmlspecialchars(strip_tags($this->state));
+        $pin_code = htmlspecialchars(strip_tags($this->pin_code));
+    
+        $Employees_list->bind_param("isssisssss", $this->user_id, $name, $email, $phone_number, $salary, $gender, $address, $city, $state, $pin_code);
+     
+        if ($Employees_list->execute()) {
+            return true;
+        }
+        return false;
+        }
+
+
+
+
+
+
+
+
+
+
+        
+    }
+
+
+
+
+
+
+
+
+
