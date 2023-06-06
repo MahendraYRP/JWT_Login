@@ -28,11 +28,10 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 
    // body
    $data = json_decode(file_get_contents("php://input"));
-
    $headers = getallheaders();
 
-   if (!empty($data->salary) && !empty($data->year)) {
-
+   for ($i=0; $i <count($data) ; $i++) {
+   if (!empty($data[$i]->salary) && !empty($data[$i]->year)) {
      try{
 
        $jwt = $headers["Authorization"];
@@ -41,13 +40,15 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 
        $decoded_data = JWT::decode($jwt, $secret_key, array('HS512'));
        
-       $salary_obj->user_id = $decoded_data->data->id;
-       $salary_obj->salary = $data->salary;
-       $salary_obj->year = $data->year;
 
+ 
+        
+        $salary_obj->user_id = $decoded_data->data->id;
+        $salary_obj->salary = $data[$i]->salary;
+        $salary_obj->year = $data[$i]->year;
+      
 
-
-       if($salary_obj->empSalary()){
+       if($salary_obj->empSalary($data[$i]->year,$data[$i]->salary)){
 
          http_response_code(200); // ok
          echo json_encode(array(
@@ -81,6 +82,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
        "message" => "All data needed"
      ));
    }
+}
 }
 
  ?> 

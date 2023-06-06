@@ -162,30 +162,19 @@ class User
 
 
 
-        public function empSalary(){
+        public function empSalary( $year,$salary){
+
+          
             $empSalary = "INSERT into ".$this->empsalary." SET user_id = ?, salary = ?, year = ?";
             
             $Salary_obj = $this->conn->prepare($empSalary);
-           
-            $year = htmlspecialchars(strip_tags($this->year));
-            $salary = htmlspecialchars(strip_tags($this->salary));
-
-            
-          
-            $insert_values = array($this->user_id, $salary, $year);
-            
-            
+                       
             $Salary_obj->bind_param("iii", $this->user_id, $salary, $year);
-            
-            foreach ($insert_values as $value) {
-                $this->user_id = $value[0];
-                $salary = $value[1];
-                $year = $value[2];
-               
+             
                 if($Salary_obj->execute()){
                     return true;
                 }
-            }
+           
             
             return false;
         }

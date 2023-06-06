@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/salary.css">
+</head>
+
+<body>
+
+    <body>
+
+        <div id="createelement">
+
+            <button type="button" value="" id="create">ADD</button>
+
+            <input type="text" value="" class="year" id="year" placeholder="enter year">
+            <input type="text" value="" class="salary" id="salary" placeholder="enter salary">
+
+
+        </div>
+        <button type="button" value="" id="btn">Submit</button>
+
+        <script>
+            const add = document.getElementById('create');
+            const createelement = document.getElementById('createelement');
+            const year = document.getElementsByClassName('year');
+            const salary = document.getElementsByClassName('salary');
+            document.getElementById('btn').addEventListener('click', getSalary)
+            add.addEventListener('click', createnewFills)
+
+
+            function createnewFills() {
+
+
+                let devElenemt = document.createElement('div');
+
+                devElenemt.innerHTML = `
+         <input type="text" value="" class="year" id="year" placeholder="enter year">
+          <input type="text" value="" class="salary" id="salary" placeholder="enter salary">
+         `;
+
+                createelement.appendChild(devElenemt)
+
+            }
+
+
+
+
+
+
+
+
+
+async function getSalary() {
+    var arr1 = [];
+    var arr2 = [];
+
+    for (let i = 0; i < year.length; i++) {
+        arr1.push(year[i].value);
+    }
+
+    for (let i = 0; i < salary.length; i++) {
+        arr2.push(salary[i].value);
+    }
+
+    let result = [];
+
+    for (let j = 0; j < arr2.length; j++) {
+        let obj = {
+            "year": arr1[j],
+            "salary": arr2[j]
+        };
+        result.push(obj);
+    }
+
+    let jsonString = JSON.stringify(result);
+    console.log(jsonString);
+
+    let token = localStorage.getItem("token");
+    console.log(token);
+
+    try {
+        const response = await fetch("http://localhost/php%20project/api_jwt/v1/empsalary.php", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            body: jsonString,          
+        });
+
+        const data = await response.json();
+       
+
+        console.log(jsonString);
+
+        console.log('Response:', data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+
+
+
+        </script>
+
+
+    </body>
+</body>
+
+</html>
