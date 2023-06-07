@@ -1,8 +1,8 @@
 <?php
 
 //include headers
-header("Access-Control-Allow-Origin: *"); // all website
-header("Access-Control-Allow-Methods: POST"); // post get delete
+header("Access-Control-Allow-Origin: *");                  // all website
+header("Access-Control-Allow-Methods: POST");             // post get delete
 header("Content-type: application/json; charset=UTF-8"); //Content-type json array
 
 include_once("../config/database.php");
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
 
             ));
         }
-   
+
         http_response_code(200); // ok
         echo json_encode(array(
             "status" => 1,
@@ -50,6 +50,4 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
 
 
 
-
-
-
+?>

@@ -11,8 +11,7 @@ class User
     public $state;
     public $pin_code;
     public $year;
-    
-
+    public $id; 
     // define properties
     public $name;
     public $email;
@@ -72,7 +71,6 @@ class User
 
     public function check_login()
     {
-
         $email_query = "SELECT * from " . $this->users_tbl . " WHERE email = ?";
 
         $usr_obj = $this->conn->prepare($email_query);
@@ -146,7 +144,7 @@ class User
             return false;
         }
         
-        
+
         public function displaySalary(){
             $displaysalay = "SELECT * from ".$this->empsalary." ";
 
@@ -158,6 +156,46 @@ class User
             return false;
 
         }
+
+        public function updateEmp($name, $email, $phone_number, $id){ 
+            $updateEmp = "UPDATE ".$this->employees_tbl." SET name = ?, email = ?, phone_number = ? WHERE id = ?" ; 
+
+            $updateEmp_obj = $this->conn->prepare($updateEmp);
+
+            $updateEmp_obj->bind_param('sssi',$name, $email, $phone_number, $id);
+            
+
+            if ($updateEmp_obj->execute()) {
+                return true;
+            }
+
+            return false;
+        }
+
+        public function updateSalary($id, $salary, $year){
+               
+            $updatesalary = "UPDATE ".$this->empsalary." SET Salary = ?, year = ? WHERE id = ?";
+
+            $updatesatary_obj = $this->conn->prepare($updatesalary);
+
+            $updatesatary_obj->bind_param('iii',$id, $salary, $year);
+
+
+            if ($updatesatary_obj->execute()) {
+                return true;
+            }
+               return false;
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -39,18 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
 
             ));
         }
-
-        
-
-
-
        
         http_response_code(200); // ok
         echo json_encode(array(
             "status" => 1,
             "data" => $emmRec["records"]
         ));
-    }
+    }    
 } else {
     http_response_code(503); // service unavailable
     echo json_encode(array(
