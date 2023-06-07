@@ -12,7 +12,7 @@ document.getElementById('employeeForm').addEventListener('submit', function(even
     var state = document.getElementById('state').value;
     var pin_code = document.getElementById('pin_code').value;
   
-    // Create employee object
+    
     var employee = {
       "name": name,
       "email": email,

@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Login</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
+
 <body>
     <h1>Login</h1>
     <form id="loginForm">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br><br>
-        
+
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
-        
-       <input type="submit" value="Login">
-       <!-- <a href="http://localhost/php%20project/api_jwt/frontend/addProject.html"></a>
+
+        <input type="submit" value="Login">
+        <!-- <a href="http://localhost/php%20project/api_jwt/frontend/addProject.html"></a>
      -->
     </form>
-
+    <a href="./createUser.html">regester</a>
     <script>
-        $(document).ready(function() {
-            $('#loginForm').submit(function(event) {
-                event.preventDefault(); 
-                
-               
+        $(document).ready(function () {
+            $('#loginForm').submit(function (event) {
+                event.preventDefault();
+
+
                 var email = $('#email').val();
                 var password = $('#password').val();
 
-               
+
                 var loginData = {
                     "email": email,
                     "password": password
@@ -39,29 +41,29 @@
                     type: "POST",
                     data: JSON.stringify(loginData),
                     contentType: "application/json; charset=UTF-8",
-                    success: function(response) {
+                    success: function (response) {
 
                         console.log(response);
                         if (response.status === 1) {
                             var jwt = response.jwt;
-                              console.log(jwt);
-                               localStorage.setItem("token",jwt)
-                            alert("User logged in successfully!");
-
-
+                            console.log(jwt);
+                            localStorage.setItem("token", jwt)
+                            // alert("User logged in successfully!");
+                            window.location.href = './index.html';                                       
 
                         } else {
                             alert("Invalid credentials: " + response.message);
                         }
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         console.log(xhr.responseText);
                         console.log(error);
                         alert("An error occurred while processing your request.");
                     }
-                }); 
+                });
             });
         }); 
     </script>
 </body>
+
 </html>

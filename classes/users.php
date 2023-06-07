@@ -89,50 +89,6 @@ class User
         return array();
     }
 
-    //create project
-    // public function create_project()
-    // {
-    //     $project_query = "INSERT INTO ".$this->projects_tbl." SET user_id = ?, name = ?, description = ? status=?";
-    //     $project_obj = $this->conn->prepare( $project_query);
-
-    //     $project_name = htmlspecialchars(strip_tags($this->project_name));
-    //     $description = htmlspecialchars(strip_tags($this->description));
-    //     $status = htmlspecialchars(strip_tags($this->status));
-
-    //     $project_obj->bind_param("isss",$this->user_id, $project_name, $description, $status);
-
-
-    //     if ($project_obj->execute()) {
-    //         return true;
-    //     }
-    //      return false;
-
-
-    // }
-
-    
-
-
-        // public function create_project(){
-
-        //     $project_query = "INSERT into ".$this->projects_tbl." SET user_id = ?, name = ?, description = ?, status = ?";
-    
-        //     $project_obj = $this->conn->prepare($project_query);
-        //     // sanitize input variables
-        //     $project_name = htmlspecialchars(strip_tags($this->project_name));
-        //     $description = htmlspecialchars(strip_tags($this->description));
-        //     $status = htmlspecialchars(strip_tags($this->status));
-        //     // bind parameters
-        //     $project_obj->bind_param("isss", $this->user_id, $project_name, $description, $status);
-    
-        //     if($project_obj->execute()){
-        //     return true;
-        //     }
-    
-        //     return false;
-    
-        // }
-
 
     public function create_Employees(){
 
@@ -180,8 +136,28 @@ class User
         }
         
 
-        
+        public function readEmployee(){
+            $readEmp = "SELECT * from ".$this->employees_tbl." ";
+            $readEmp_obj = $this->conn->prepare($readEmp);
 
+            if ($readEmp_obj->execute()) {
+                return $readEmp_obj->get_result();
+            }
+            return false;
+        }
+        
+        
+        public function displaySalary(){
+            $displaysalay = "SELECT * from ".$this->empsalary." ";
+
+            $displaysalary_obj = $this->conn->prepare($displaysalay);
+
+            if ( $displaysalary_obj->execute()) {
+                return  $displaysalary_obj->get_result();
+            }
+            return false;
+
+        }
 
 
 
