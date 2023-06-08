@@ -6,18 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/salary.css">
-    <link rel="stylesheet" type="text/css" href="./css/sibeBar.css">
+
     
 </head>
 
 <body>
 
     <body>
-
-
-
-
+        
         <div id="createelement">
 
             <button type="button" value="" id="create">ADD</button>
@@ -94,8 +90,8 @@ async function getSalary() {
     console.log(jsonString);
     console.log(result);
 
-    // let token = localStorage.getItem("token");
-    // console.log(token);
+    let token = localStorage.getItem("token");
+    console.log(token);
 
     try {
         const updateSalaryData = "http://localhost/php%20project/api_jwt/v1/updateSalary.php";
@@ -103,8 +99,8 @@ async function getSalary() {
         const response = await fetch(updateSalaryData, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
-                // 'Authorization': token
+                'Content-Type': 'application/json',
+                'Authorization': token
             },
             body: jsonString,          
         });
@@ -128,7 +124,7 @@ async function getSalary() {
 
 
         </script>
-<!-- <script src="./js/loginProtection.js"></script> -->
+<script src="./js/loginProtection.js"></script>
 
     </body>
 </body>

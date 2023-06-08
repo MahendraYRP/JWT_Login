@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
 $data = json_decode(file_get_contents("php://input"));
 
+
+
 if (!empty($data->name) && !empty($data->email) && !empty($data->phone_number) && !empty($data->id)) {
   
 $updateEmp->name = $data->name;
