@@ -102,14 +102,14 @@ async function getSalary() {
                 'Content-Type': 'application/json',
                 'Authorization': token
             },
-            body: jsonString,          
+            body: JSON.stringify(result),          
         });
 
-        console.log(response);
+
         
         const data = response;
 
-        console.log(jsonString);
+        
 
         console.log('Response:', data);
     } catch (error) {
