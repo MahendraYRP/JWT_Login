@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $data = json_decode(file_get_contents("php://input"));
   print_r(json_encode($data));
+
+
     if (!empty($data->id) && !empty($data->salary) && !empty($data->year)) {
 
         
@@ -48,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     }
 
 } else {
-    http_response_code(503); // service unavailable
+    http_response_code(503);
     echo json_encode(
         array(
             "status" => 0,

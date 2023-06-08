@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/salary.css">
+    <link rel="stylesheet" type="text/css" href="./css/sibeBar.css">
+    
+</head>
+
+<body>
+
+    <body>
+
+
+
+
+        <div id="createelement">
+
+            <button type="button" value="" id="create">ADD</button>
+
+            <input type="text" value="" class="year" id="year" placeholder="enter year">
+            <input type="text" value="" class="salary" id="salary" placeholder="enter salary">
+           
+           
+
+        </div>
+        <button type="button" value="" id="btn">Submit</button>
+
+        <script>
+            const add = document.getElementById('create');
+            const createelement = document.getElementById('createelement');
+            const year = document.getElementsByClassName('year');
+            const salary = document.getElementsByClassName('salary');
+            document.getElementById('btn').addEventListener('click', getSalary)
+            add.addEventListener('click', createnewFills)
+            let userId = new URLSearchParams(window.location.search);
+            var id = parseInt(userId.get('userId'));
+
+
+
+            function createnewFills() {
+
+
+                let devElenemt = document.createElement('div');
+
+                devElenemt.innerHTML = `
+         <input type="text" value="" class="year" id="year" placeholder="enter year">
+          <input type="text" value="" class="salary" id="salary" placeholder="enter salary">
+         
+         `;
+
+                createelement.appendChild(devElenemt)
+
+            }
+
+            
+
+
+async function getSalary() {
+
+
+
+    var arr1 = [];
+    var arr2 = [];
+
+    for (let i = 0; i < year.length; i++) {
+        arr1.push(parseInt(year[i].value));
+    }
+
+    for (let i = 0; i < salary.length; i++) {
+        arr2.push(parseInt(salary[i].value));
+    }
+
+    let result = [];
+
+    for (let j = 0; j < arr2.length; j++) {
+        let obj = {
+            "id":id,
+            "year": arr1[j],
+            "salary": arr2[j],
+            
+           
+        };
+        result.push(obj);
+    }
+
+
+
+    let jsonString = JSON.stringify(result);
+    console.log(jsonString);
+    console.log(result);
+
+    // let token = localStorage.getItem("token");
+    // console.log(token);
+
+    try {
+        const updateSalaryData = "http://localhost/php%20project/api_jwt/v1/updateSalary.php";
+
+        const response = await fetch(updateSalaryData, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Authorization': token
+            },
+            body: jsonString,          
+        });
+
+        console.log(response.json());
+        
+        const data = await response.json();
+
+        console.log(response.json());
+
+        
+
+        console.log(jsonString);
+
+        console.log('Response:', data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+
+
+        </script>
+<!-- <script src="./js/loginProtection.js"></script> -->
+
+    </body>
+</body>
+
+</html>

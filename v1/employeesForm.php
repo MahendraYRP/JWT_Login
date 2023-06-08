@@ -26,7 +26,7 @@ $emp_obj = new User($connection);
 
 if($_SERVER['REQUEST_METHOD'] === "POST"){
 
-   // body
+
    $data = json_decode(file_get_contents("php://input"));
 
    $headers = getallheaders();

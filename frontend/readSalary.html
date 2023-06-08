@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Salary Data</title>
+    <style>
+
+
+        th, td {
+            border: 1px solid rgb(189, 174, 174);
+            padding: 8px;
+            text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+    <table id="salaryTable">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Salary</th>
+                <th>year</th>
+                <th>User_id</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+
+
+           
+        </tbody>
+    </table>
+
+    <script>
+
+        fetch("http://localhost/php%20project/api_jwt/v1/readsalary.php")
+            .then(response => response.json())
+            .then(salarydata => {
+                const tableBody = document.querySelector("#salaryTable tbody");
+                    console.log(salarydata);
+                salarydata.data.forEach(entry => {
+
+                    const row = document.createElement("tr");
+                    const idCell = document.createElement("td");
+                    idCell.textContent = entry.id;
+                    const salaryCell = document.createElement("td");
+                    salaryCell.textContent = entry.salary;
+                    const yearCell = document.createElement("td");
+                    yearCell.textContent = entry.year;
+                    const userIdCell = document.createElement("td");
+                    userIdCell.textContent = entry.user_id;
+
+                    //button
+                    let button =  document.createElement('button')
+                    button.innerHTML = "update";
+
+                     //clickEvent
+                     
+                    button.addEventListener('click',()=>{
+                        window.location.href = `updateSalary.html?userId=${entry.id}`;
+                    })
+
+                    row.appendChild(idCell);
+                    row.appendChild(salaryCell);
+                    row.appendChild(yearCell);
+                    row.appendChild(userIdCell);
+                    row.appendChild(button);
+                   
+                   
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.log("Error fetching salary data:", error);
+            });
+    </script>
+</body>
+</html>
