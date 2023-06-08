@@ -105,13 +105,9 @@ async function getSalary() {
             body: jsonString,          
         });
 
-        console.log(response.json());
+        console.log(response);
         
-        const data = await response.json();
-
-        console.log(response.json());
-
-        
+        const data = response;
 
         console.log(jsonString);
 
