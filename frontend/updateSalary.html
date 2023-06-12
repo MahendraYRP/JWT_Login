@@ -6,13 +6,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+    <link rel="stylesheet" href="./css/salary.css">
+    <link rel="stylesheet" type="text/css" href="./css/sibeBar.css">
     
 </head>
 
 <body>
 
     <body>
+        <div class="sidebar">
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="./salary.html">salary</a></li>
+              <li><a href="./employeForm.html">Employee Form</a></li>
+              <li><a href="./updateSalary.html">update Salary</a></li>
+        
+              <div class="sidenav">
+                <button class="dropdown-btn">Employee
+        
+                </button>
+                <div class="dropdown-container">
+                  <a href="./employeForm.html">Employee Form</a>
+                  <a href="./employeForm.html">Update Employee</a>
+                  <li><a href="./updateSalary.html">update Salary</a></li>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                </div>
+              </div>
+        
+              <li><a href="./login.html">Logout</a></li>
+            </ul>
+          </div>
+        
+          <div class="content">
+            <nav>
+              <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="./salary.html">salary</a></li>
+                <li><a href="./employeForm.html">Employee Form</a></li>
+                <li><a id="logout" href="./login.html">Logout</a></li>
+              </ul>
+            </nav>
+        
+            <div class="main-content">
+              <!-- Your main content goes here -->
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
         <div id="createelement">
 
@@ -49,7 +104,7 @@
          
          `;
 
-                createelement.appendChild(devElenemt)
+        createelement.appendChild(devElenemt)
 
             }
 
@@ -105,11 +160,10 @@ async function getSalary() {
             body: JSON.stringify(result),          
         });
 
-
+        
+           
         
         const data = response;
-
-        
 
         console.log('Response:', data);
     } catch (error) {

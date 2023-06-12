@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPDATE SALARY</title>
+    <style>
+        th,
+        td {
+            border: 1px solid rgb(189, 174, 174);
+            padding: 8px;
+            text-align: center;
+        }
+
+        div {
+            display: flex;
+            padding-left: 20px;
+            gap: 10px;
+        }
+
+        input {
+            height: 10px;
+            margin-top: 23px;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <form>
+        <div>
+            <h5>name</h5>
+            <input type="text" placeholder="name" class="empdata" id="name">
+        </div>
+        <div>
+            <h5>email</h5>
+            <input type="text" placeholder="email" class="empdata" id="email">
+        </div>
+        <div>
+            <h5>Number</h5>
+            <input type="text" placeholder="phone_number" class="empdata" id="phone_number">
+        </div>
+        <div>
+
+            <button type="button" id="button">update</button>
+        </div>
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+            var token = localStorage.getItem("token");
+        var button = document.getElementById('button');
+        var name = document.getElementById('name');
+        var email = document.getElementById('email');
+        var phone_number = document.getElementById('phone_number');
+        var empdata = document.getElementsByClassName('empdata');
+
+
+        const empId = new URLSearchParams(window.location.search);
+
+        const id = empId.get("empId");
+
+        console.log(id);
+
+
+        try {
+            fetch("http://localhost/php%20project/api_jwt/v1/readEmployee.php")
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+
+
+                    data.data.forEach(element => {
+                        if (element.id == id) {
+                            name.value = element.name;
+                            email.value = element.email;
+                            phone_number.value = element.phone_number;
+                        }
+                    });
+
+
+                })
+
+        } catch (error) {
+            console.log(error);
+        }
+
+
+        var employeeArray = [];
+
+        button.addEventListener('click', async () => {
+            for (let i = 0; i < empdata.length; i++) {
+
+                employeeArray.push(empdata[i].value);
+
+            }
+
+           let EmployeeObject = {
+                 "id":id,
+                 "name":employeeArray[0],
+                 "email":employeeArray[1],
+                 "phone_number":employeeArray[2]
+           }
+
+           console.log(EmployeeObject);
+
+
+
+            let result = JSON.stringify(employeeArray);
+            console.log(result);
+
+        try {
+        const updateSalaryData = "http://localhost/php%20project/api_jwt/v1/updateEmp.php";
+
+        const response = await fetch(updateSalaryData, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify(EmployeeObject),          
+        });
+
+        
+           
+        
+        const data = response;
+
+        console.log('Response:', data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+
+        })
+
+
+
+
+
+       
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

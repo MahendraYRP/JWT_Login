@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        th,
+        td {
+            border: 1px solid rgb(189, 174, 174);
+            padding: 8px;
+            text-align: center;
+        }
+
+        table{
+            
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>email</th>
+            <th>phone_number</th>
+            <th>Action</th>
+        </tr>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <script>
+
+        // let tr = document.createElement('tr');
+        let tbody = document.querySelector('tbody');
+
+        try {
+            fetch("http://localhost/php%20project/api_jwt/v1/readEmployee.php")
+                .then(response => response.json())
+                .then(Empdata => {
+
+
+
+                    Empdata.data.forEach(result => {
+                        
+                        let tr = document.createElement('tr');
+
+                        let td1 = document.createElement('td');
+                        td1.append(result.id);
+
+                        let td2 = document.createElement('td');
+                        td2.append(result.name);
+
+                        let td3 = document.createElement('td');
+                        td3.append(result.email);
+
+                        let td4 = document.createElement('td');
+                        td4.append(result.phone_number);   
+
+                        let update = document.createElement('button');
+                        update.innerText = "update";
+                        update.addEventListener('click',()=>{
+                            window.location.href = `UpdateEmployee.html?empId=${result.id}`;
+                        })       
+                        
+                        let br =  document.createElement('br');
+                       
+                        
+
+                         tr.appendChild(td1);
+                         tr.appendChild(td2);
+                         tr.appendChild(td3);
+                         tr.appendChild(td4);
+                         tr.appendChild(update);
+                         tr.appendChild(br);
+                        
+
+                        
+            
+
+
+                         tbody.appendChild(tr);
+
+
+                    })
+
+
+                });
+
+        } catch (error) {
+            console.error(error)
+        }
+
+
+    </script>
+
+
+
+</body>
+
+</html>
