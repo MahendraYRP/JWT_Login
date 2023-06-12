@@ -48,7 +48,7 @@ if ($updateEmp->updateEmp($data->name, $data->email, $data->phone_number, $data-
             "message" => "Values needed"
         ));
 }
-    
+   
 }else{
     http_response_code(503); // service unavailable
     echo json_encode(array(

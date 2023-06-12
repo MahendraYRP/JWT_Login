@@ -2,103 +2,103 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/salary.css">
-    <link rel="stylesheet" type="text/css" href="./css/sibeBar.css">
-    
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/salary.css">
+  <link rel="stylesheet" type="text/css" href="./css/sibeBar.css">
+
 </head>
 
 <body>
 
-    <body>
-        <div class="sidebar">
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="./salary.html">salary</a></li>
-              <li><a href="./employeForm.html">Employee Form</a></li>
-              <li><a href="./updateSalary.html">update Salary</a></li>
-        
-              <div class="sidenav">
-                <button class="dropdown-btn">Employee
-        
-                </button>
-                <div class="dropdown-container">
-                  <a href="./employeForm.html">Employee Form</a>
-                  <a href="./employeForm.html">Update Employee</a>
-                  <li><a href="./updateSalary.html">update Salary</a></li>
-                  <a href="#">Link 2</a>
-                  <a href="#">Link 3</a>
-                </div>
-              </div>
-        
-              <li><a href="./login.html">Logout</a></li>
-            </ul>
+  <body>
+    <div class="sidebar">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="./salary.html">salary</a></li>
+        <li><a href="./employeForm.html">Employee Form</a></li>
+        <li><a href="./updateSalary.html">update Salary</a></li>
+
+        <div class="sidenav">
+          <button class="dropdown-btn">Employee
+
+          </button>
+          <div class="dropdown-container">
+            <a href="./employeForm.html">Employee Form</a>
+            <a href="./employeForm.html">Update Employee</a>
+            <li><a href="./updateSalary.html">update Salary</a></li>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
           </div>
-        
-          <div class="content">
-            <nav>
-              <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="./salary.html">salary</a></li>
-                <li><a href="./employeForm.html">Employee Form</a></li>
-                <li><a id="logout" href="./login.html">Logout</a></li>
-              </ul>
-            </nav>
-        
-            <div class="main-content">
-              <!-- Your main content goes here -->
-            </div>
-          </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        <div id="createelement">
-
-            <button type="button" value="" id="create">ADD</button>
-
-            <input type="text" value="" class="year" id="year" placeholder="enter year">
-            <input type="text" value="" class="salary" id="salary" placeholder="enter salary">
-           
-           
-
         </div>
-        <button type="button" value="" id="btn">Submit</button>
 
-        <script>
-            const add = document.getElementById('create');
-            const createelement = document.getElementById('createelement');
-            const year = document.getElementsByClassName('year');
-            const salary = document.getElementsByClassName('salary');
-            document.getElementById('btn').addEventListener('click', getSalary)
-            add.addEventListener('click', createnewFills)
-            let userId = new URLSearchParams(window.location.search);
-            var id = parseInt(userId.get('userId'));
+        <li><a href="./login.html">Logout</a></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="./salary.html">salary</a></li>
+          <li><a href="./employeForm.html">Employee Form</a></li>
+          <li><a id="logout" href="./login.html">Logout</a></li>
+        </ul>
+      </nav>
+
+      <div class="main-content">
+        <!-- Your main content goes here -->
+      </div>
+    </div>
 
 
 
-            function createnewFills() {
 
 
-                let devElenemt = document.createElement('div');
 
-                devElenemt.innerHTML = `
+
+
+
+
+
+
+
+
+
+    <div id="createelement">
+
+      <button type="button" value="" id="create">ADD</button>
+
+      <input type="text" value="" class="year" id="year" placeholder="enter year">
+      <input type="text" value="" class="salary" id="salary" placeholder="enter salary">
+
+
+
+    </div>
+    <button type="button" value="" id="btn">Submit</button>
+
+    <script>
+      const add = document.getElementById('create');
+      const createelement = document.getElementById('createelement');
+      const year = document.getElementsByClassName('year');
+      const salary = document.getElementsByClassName('salary');
+      document.getElementById('btn').addEventListener('click', getSalary)
+      add.addEventListener('click', createnewFills)
+      let userId = new URLSearchParams(window.location.search);
+      var id = parseInt(userId.get('userId'));
+
+
+
+      function createnewFills() {
+
+
+        let devElenemt = document.createElement('div');
+
+        devElenemt.innerHTML = `
          <input type="text" value="" class="year" id="year" placeholder="enter year">
           <input type="text" value="" class="salary" id="salary" placeholder="enter salary">
          
@@ -106,77 +106,77 @@
 
         createelement.appendChild(devElenemt)
 
-            }
-
-            
-
-
-async function getSalary() {
+      }
 
 
 
-    var arr1 = [];
-    var arr2 = [];
 
-    for (let i = 0; i < year.length; i++) {
-        arr1.push(parseInt(year[i].value));
-    }
+      async function getSalary() {
 
-    for (let i = 0; i < salary.length; i++) {
-        arr2.push(parseInt(salary[i].value));
-    }
 
-    let result = [];
 
-    for (let j = 0; j < arr2.length; j++) {
-        let obj = {
-            "id":id,
+        var arr1 = [];
+        var arr2 = [];
+
+        for (let i = 0; i < year.length; i++) {
+          arr1.push(parseInt(year[i].value));
+        }
+
+        for (let i = 0; i < salary.length; i++) {
+          arr2.push(parseInt(salary[i].value));
+        }
+
+        let result = [];
+
+        for (let j = 0; j < arr2.length; j++) {
+          let obj = {
+            "id": id,
             "year": arr1[j],
             "salary": arr2[j],
-            
-           
-        };
-        result.push(obj);
-    }
+
+
+          };
+          result.push(obj);
+        }
 
 
 
-    let jsonString = JSON.stringify(result);
-    console.log(jsonString);
-    console.log(result);
+        let jsonString = JSON.stringify(result);
+        console.log(jsonString);
+        console.log(result);
 
-    let token = localStorage.getItem("token");
-    console.log(token);
+        let token = localStorage.getItem("token");
+        console.log(token);
 
-    try {
-        const updateSalaryData = "http://localhost/php%20project/api_jwt/v1/updateSalary.php";
+        try {
+          const updateSalaryData = "http://localhost/php%20project/api_jwt/v1/updateSalary.php";
 
-        const response = await fetch(updateSalaryData, {
+          const response = await fetch(updateSalaryData, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': token
+              'Content-Type': 'application/json',
+              'Authorization': token
             },
-            body: JSON.stringify(result),          
-        });
-
-        
-           
-        
-        const data = response;
-
-        console.log('Response:', data);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+            body: JSON.stringify(result),
+          });
 
 
 
-        </script>
-<script src="./js/loginProtection.js"></script>
 
-    </body>
+          const data = response;
+
+          console.log('Response:', data);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+
+
+
+    </script>
+    <script src="./js/loginProtection.js"></script>
+
+  </body>
 </body>
 
 </html>
