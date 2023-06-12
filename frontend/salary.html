@@ -8,7 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/salary.css">
     <link rel="stylesheet" type="text/css" href="./css/sibeBar.css">
-    
+
 </head>
 
 <body>
@@ -17,29 +17,29 @@
 
         <div class="sidebar">
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="./salary.html">salary</a></li>
-              <li><a href="./employeForm.html">Employee Form</a></li>
-              <li><a id="logout" href="./login.html">Logout</a></li>
-            </ul>
-          </div> 
-        
-          <div class="content">
-            <nav>
-              <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="./salary.html">salary</a></li>
                 <li><a href="./employeForm.html">Employee Form</a></li>
-                <li><a href="./login.html">Logout</a></li>
-              </ul>
+                <li><a id="logout" href="./login.html">Logout</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="./salary.html">salary</a></li>
+                    <li><a href="./employeForm.html">Employee Form</a></li>
+                    <li><a href="./login.html">Logout</a></li>
+                </ul>
             </nav>
-            
+
             <div class="main-content">
-              <!-- Your main content goes here -->
+                <!-- Your main content goes here -->
             </div>
-          </div>
+        </div>
 
 
         <div id="createelement">
@@ -77,61 +77,64 @@
             }
 
 
-async function getSalary() {
-    var arr1 = [];
-    var arr2 = [];
 
-    for (let i = 0; i < year.length; i++) {
-        arr1.push(year[i].value);
-    }
 
-    for (let i = 0; i < salary.length; i++) {
-        arr2.push(salary[i].value);
-    }
 
-    let result = [];
+            async function getSalary() {
+                var arr1 = [];
+                var arr2 = [];
 
-    for (let j = 0; j < arr2.length; j++) {
-        let obj = {
-            "year": arr1[j],
-            "salary": arr2[j]
-        };
-        result.push(obj);
-    }
+                for (let i = 0; i < year.length; i++) {
+                    arr1.push(year[i].value);
+                }
 
-    let jsonString = JSON.stringify(result);
-    console.log(jsonString);
+                for (let i = 0; i < salary.length; i++) {
+                    arr2.push(salary[i].value);
+                }
 
-    let token = localStorage.getItem("token");
-    console.log(token);
+                let result = [];
 
-    try {
-        const response = await fetch("http://localhost/php%20project/api_jwt/v1/empsalary.php", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': token
-            },
-            body: jsonString,          
-        });
+                for (let j = 0; j < arr2.length; j++) {
+                    let obj = {
+                        "year": arr1[j],
+                        "salary": arr2[j]
+                    };
+                    result.push(obj);
+                }
 
-        const data = response;
-       
+                let jsonString = JSON.stringify(result);
+                console.log(jsonString);
 
-        console.log(jsonString);
+                let token = localStorage.getItem("token");
+                console.log(token);
 
-        console.log('Response:', data);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+                try {
+                    const response = await fetch("http://localhost/php%20project/api_jwt/v1/empsalary.php", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token
+                        },
+                        body: jsonString,
+                    });
+
+                    const data = response;
+
+
+                    console.log(jsonString);
+
+                    console.log('Response:', data);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
 
 
 
 
 
         </script>
-<script src="./js/loginProtection.js"></script>
+        <script src="./js/loginProtection.js"></script>
 
     </body>
 </body>

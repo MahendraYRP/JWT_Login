@@ -84,13 +84,15 @@
     <script>
       const add = document.getElementById('create');
       const createelement = document.getElementById('createelement');
-      const year = document.getElementsByClassName('year');
-      const salary = document.getElementsByClassName('salary');
+      var year = document.getElementsByClassName('year');
+      var salary = document.getElementsByClassName('salary');
       document.getElementById('btn').addEventListener('click', getSalary)
       add.addEventListener('click', createnewFills)
       let userId = new URLSearchParams(window.location.search);
-      var id = parseInt(userId.get('userId'));
+      var user_id = parseInt(userId.get('userId'));
 
+    let yeardata = document.getElementById('year');
+    let salarydata = document.getElementById('salary');
 
 
       function createnewFills() {
@@ -101,7 +103,6 @@
         devElenemt.innerHTML = `
          <input type="text" value="" class="year" id="year" placeholder="enter year">
           <input type="text" value="" class="salary" id="salary" placeholder="enter salary">
-         
          `;
 
         createelement.appendChild(devElenemt)
@@ -109,12 +110,49 @@
       }
 
 
+      fetch("http://localhost/php%20project/api_jwt/v1/readsalary.php")
+        .then(response => response.json())
+        .then(element => {
+
+          element.data.map(eachData => {        
+                    if (eachData.user_id == user_id) {
+                      let devElenemt = document.createElement('div');
+                      devElenemt.innerHTML = `
+                      <input type="text" value="" class="year" id="year" placeholder="enter year">
+                      <input type="text" value="" class="salary" id="salary" placeholder="enter salary">
+                   `;
+                    createelement.appendChild(devElenemt);
+                                   
+                    yeardata.value = eachData.year;
+                    salarydata.value = eachData.salary;
+
+                  }
+
+          })
+
+        })
+
+
+
+      // for (let i = 0; i < 5; i++) {
+      //   let devElenemt = document.createElement('div');
+
+
+
+      //   devElenemt.innerHTML = `
+      //   <input type="text" value="" class="year" id="year" placeholder="enter year">
+      //   <input type="text" value="" class="salary" id="salary" placeholder="enter salary">
+      //   `;
+
+      //   createelement.appendChild(devElenemt)
+
+      // }
+
+
+
 
 
       async function getSalary() {
-
-
-
         var arr1 = [];
         var arr2 = [];
 
@@ -130,7 +168,7 @@
 
         for (let j = 0; j < arr2.length; j++) {
           let obj = {
-            "id": id,
+            "user_id": user_id,
             "year": arr1[j],
             "salary": arr2[j],
 
@@ -138,8 +176,6 @@
           };
           result.push(obj);
         }
-
-
 
         let jsonString = JSON.stringify(result);
         console.log(jsonString);
@@ -150,7 +186,6 @@
 
         try {
           const updateSalaryData = "http://localhost/php%20project/api_jwt/v1/updateSalary.php";
-
           const response = await fetch(updateSalaryData, {
             method: 'POST',
             headers: {

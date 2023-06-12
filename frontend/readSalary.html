@@ -38,6 +38,7 @@
             .then(salarydata => {
                 const tableBody = document.querySelector("#salaryTable tbody");
                     console.log(salarydata);
+                    
                 salarydata.data.forEach(entry => {
 
                     const row = document.createElement("tr");
@@ -60,7 +61,7 @@
                      //clickEvent
                      
                     button.addEventListener('click',()=>{
-                        window.location.href = `updateSalary.html?userId=${entry.id}`;
+                        window.location.href = `updateSalary.html?userId=${entry.user_id}`;
                     })
 
                     row.appendChild(idCell);

@@ -24,20 +24,19 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     for ($i=0; $i <count($data) ; $i++) {
 
-        if (!empty($data[$i]->id) && !empty($data[$i]->salary) && !empty($data[$i]->year)) {
+        if (!empty($data[$i]->user_id) && !empty($data[$i]->salary) && !empty($data[$i]->year)) {
 
 
             $updateSalary->salary = $data[$i]->salary;
             $updateSalary->year = $data[$i]->year;
-            $updateSalary->id = $data[$i]->id;
+            $updateSalary->user_id = $data[$i]->user_id;
 
-            if ($updateSalary->updateSalary($data[$i]->salary, $data[$i]->year, $data[$i]->id)) {
+            if ($updateSalary->updateSalary($data[$i]->salary, $data[$i]->year, $data[$i]->user_id)) {
                 http_response_code(200);
                 echo json_encode(
                     array(
                         "status" => 1,
                         "message" => "Data updated",
-
 
                     )
                 );

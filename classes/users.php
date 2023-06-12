@@ -172,13 +172,13 @@ class User
             return false;
         }
 
-        public function updateSalary($id, $salary, $year){
+        public function updateSalary($user_id, $salary, $year){
                
-            $updatesalary = "UPDATE ".$this->empsalary." SET Salary = ?, year = ? WHERE id = ?";
+            $updatesalary = "UPDATE ".$this->empsalary." SET Salary = ?, year = ? WHERE user_id	 = ?";
 
             $updatesatary_obj = $this->conn->prepare($updatesalary);
 
-            $updatesatary_obj->bind_param('iii',$id, $salary, $year);
+            $updatesatary_obj->bind_param('iii',$user_id, $salary, $year);
 
 
             if ($updatesatary_obj->execute()) {
@@ -186,18 +186,6 @@ class User
             }
                return false;
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
         
     }
